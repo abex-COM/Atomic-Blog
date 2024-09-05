@@ -19,12 +19,14 @@ export default function App() {
   function handleTheme() {
     setTheme((prev) => !prev);
   }
-  console.log(theme);
+  function clearPost() {
+    setPosts([]);
+  }
   return (
     <div
       className={`grid h-screen ${theme ? "dark" : ""} grid-rows-[auto_auto_1fr_auto] overflow-hidden bg-pink-50`}
     >
-      <Header posts={posts} onTheme={handleTheme} />
+      <Header posts={posts} onTheme={handleTheme} onClearPost={clearPost} />
       <AddPost />
       <Main posts={posts} />
 

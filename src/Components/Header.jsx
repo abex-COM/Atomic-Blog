@@ -1,4 +1,4 @@
-export default function Header({ posts, onTheme }) {
+export default function Header({ posts, onTheme, onClearPost }) {
   return (
     <nav className="flex w-full flex-col bg-yellow-400 py-3 text-xs shadow-md dark:bg-slate-900 sm:flex-row sm:pl-10">
       <h1 className="m-auto text-sm font-bold text-sky-500 dark:text-slate-200 xs:text-base md:text-lg lg:text-2xl xl:text-4xl">
@@ -10,7 +10,7 @@ export default function Header({ posts, onTheme }) {
 
       <div className="flex justify-end gap-3 px-3">
         <SearchInput />
-        <ClearPost />
+        <ClearPost onClearPost={onClearPost} />
       </div>
     </nav>
   );
@@ -29,16 +29,17 @@ function SearchInput() {
     <div className="flex justify-end">
       <input
         type="text"
-        className="w-max rounded-lg py-1 pl-2 text-xs dark:text-slate-300 outline-none dark:bg-slate-600 xs:text-sm sm:w-32 sm:py-2 sm:text-base border-none lg:text-lg"
+        className="w-max rounded-lg border-none py-1 pl-2 text-xs outline-none dark:bg-slate-600 dark:text-slate-300 xs:text-sm sm:w-32 sm:py-2 sm:text-base lg:text-lg"
         placeholder="Search post.."
       />
     </div>
   );
 }
-function ClearPost() {
+function ClearPost({ onClearPost }) {
   return (
     <div className="flex justify-center">
       <button
+        onClick={onClearPost}
         className="w-max rounded-lg bg-green-600 px-2 py-1 font-mono font-semibold uppercase text-white hover:bg-green-500 dark:bg-blue-800 sm:text-base md:text-lg lg:text-xl"
         type="button"
       >
