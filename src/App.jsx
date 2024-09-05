@@ -12,7 +12,9 @@ function createRandomPost() {
 }
 
 export default function App() {
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
   const [query, setQeury] = useState("");
 
   const [posts, setPosts] = useState(() =>
@@ -27,9 +29,6 @@ export default function App() {
     setPosts([]);
   }
 
-  function setSearch(e) {
-    setQeury(e.target.value);
-  }
   useEffect(() => {
     if (query.trim() === "") {
       setFilteredPosts(posts);
@@ -56,14 +55,10 @@ export default function App() {
         posts={filteredPosts}
         query={query}
         onTheme={handleTheme}
-        onChange={setSearch}
+        onChange={(e) => setQeury(e.target.value)}
         onClearPost={clearPost}
       />
-      <AddPost
-        onHandleSubmit={addNewPost}
-        // postTitle={postTitle}
-        // postBody={postBody}
-      />
+      <AddPost onHandleSubmit={addNewPost} />
       <Main posts={filteredPosts} />
 
       <Footer />
