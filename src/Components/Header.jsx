@@ -1,6 +1,6 @@
-export default function Header({ posts, onTheme, onClearPost }) {
+export default function Header({ posts, onTheme, onClearPost, onChange,query }) {
   return (
-    <nav className="flex w-full flex-col bg-yellow-400 py-3 text-xs shadow-md dark:bg-slate-900 sm:flex-row sm:pl-10">
+    <nav className="flex w-full flex-col bg-yellow-600 py-3 text-xs shadow-md dark:bg-slate-900 sm:flex-row sm:pl-10">
       <h1 className="m-auto text-sm font-bold text-sky-500 dark:text-slate-200 xs:text-base md:text-lg lg:text-2xl xl:text-4xl">
         🔯The Atomic Blog
       </h1>
@@ -9,7 +9,7 @@ export default function Header({ posts, onTheme, onClearPost }) {
       <PostFound posts={posts} />
 
       <div className="flex justify-end gap-3 px-3">
-        <SearchInput />
+        <SearchInput onChange={onChange} query={query} />
         <ClearPost onClearPost={onClearPost} />
       </div>
     </nav>
@@ -24,10 +24,12 @@ function PostFound({ posts }) {
     </p>
   );
 }
-function SearchInput() {
+function SearchInput({ onChange,query }) {
   return (
     <div className="flex justify-end">
       <input
+      onChange={onChange}
+      value={query}
         type="text"
         className="w-max rounded-lg border-none py-1 pl-2 text-xs outline-none dark:bg-slate-600 dark:text-slate-300 xs:text-sm sm:w-32 sm:py-2 sm:text-base lg:text-lg"
         placeholder="Search post.."

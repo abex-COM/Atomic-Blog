@@ -7,6 +7,9 @@ export default {
   },
   theme: {
     extend: {
+      backgroundColor: {
+        "custom-green": "rgb(0,40,33)",
+      },
       screens: {
         xs: "425px",
       },

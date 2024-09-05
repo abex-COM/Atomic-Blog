@@ -3,7 +3,7 @@ import Footer from "./Components/Footer";
 import { faker } from "@faker-js/faker";
 import Main from "./Components/Main";
 import AddPost from "./Components/AddPost";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function createRandomPost() {
   return {
     title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
@@ -13,22 +13,58 @@ function createRandomPost() {
 
 export default function App() {
   const [theme, setTheme] = useState(false);
+  const [query, setQeury] = useState("");
+
   const [posts, setPosts] = useState(() =>
     Array.from({ length: 30 }, () => createRandomPost()),
   );
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+
   function handleTheme() {
     setTheme((prev) => !prev);
   }
   function clearPost() {
     setPosts([]);
   }
+
+  function setSearch(e) {
+    setQeury(e.target.value);
+  }
+  useEffect(() => {
+    if (query.trim() === "") {
+      setFilteredPosts(posts);
+    } else {
+      const searchedItem =
+        posts.length > 0
+          ? posts.filter((post) =>
+              post.title
+                .toLocaleLowerCase()
+                .includes(query.toLocaleLowerCase()),
+            )
+          : posts;
+      setFilteredPosts(searchedItem);
+    }
+  }, [posts, query]);
+  function addNewPost(item) {
+    setPosts([...posts, item]);
+  }
   return (
     <div
       className={`grid h-screen ${theme ? "dark" : ""} grid-rows-[auto_auto_1fr_auto] overflow-hidden bg-pink-50`}
     >
-      <Header posts={posts} onTheme={handleTheme} onClearPost={clearPost} />
-      <AddPost />
-      <Main posts={posts} />
+      <Header
+        posts={filteredPosts}
+        query={query}
+        onTheme={handleTheme}
+        onChange={setSearch}
+        onClearPost={clearPost}
+      />
+      <AddPost
+        onHandleSubmit={addNewPost}
+        // postTitle={postTitle}
+        // postBody={postBody}
+      />
+      <Main posts={filteredPosts} />
 
       <Footer />
     </div>
