@@ -1,7 +1,7 @@
 export default function Header({ posts, onTheme }) {
   return (
-    <nav className="flex w-full flex-col bg-yellow-400 py-3 text-xs shadow-md dark:bg-blue-950 sm:flex-row sm:pl-10">
-      <h1 className="m-auto text-sm font-bold text-sky-500 dark:text-yellow-50 xs:text-base md:text-lg lg:text-2xl xl:text-4xl">
+    <nav className="flex w-full flex-col bg-yellow-400 py-3 text-xs shadow-md dark:bg-slate-900 sm:flex-row sm:pl-10">
+      <h1 className="m-auto text-sm font-bold text-sky-500 dark:text-slate-200 xs:text-base md:text-lg lg:text-2xl xl:text-4xl">
         🔯The Atomic Blog
       </h1>
       <Theme onTheme={onTheme} />
@@ -18,8 +18,8 @@ export default function Header({ posts, onTheme }) {
 
 function PostFound({ posts }) {
   return (
-    <p className="m-auto text-xs font-semibold text-blue-700 dark:text-blue-50 xs:text-base sm:text-lg md:text-lg lg:text-xl xl:text-2xl">
-      <span className="font-mono text-green-400">{posts.length}</span> atomic
+    <p className="m-auto text-xs font-semibold text-blue-700 dark:text-slate-300 xs:text-base sm:text-lg md:text-lg lg:text-xl xl:text-2xl">
+      <span className="font-mono text-green-600">{posts.length}</span> atomic
       post found
     </p>
   );
@@ -29,7 +29,7 @@ function SearchInput() {
     <div className="flex justify-end">
       <input
         type="text"
-        className="w-max rounded-lg border py-1 pl-2 text-xs focus:outline-cyan-500 dark:bg-gray-300 xs:text-sm sm:w-32 sm:py-2 sm:text-base lg:text-lg"
+        className="w-max rounded-lg py-1 pl-2 text-xs dark:text-slate-300 outline-none dark:bg-slate-600 xs:text-sm sm:w-32 sm:py-2 sm:text-base border-none lg:text-lg"
         placeholder="Search post.."
       />
     </div>
